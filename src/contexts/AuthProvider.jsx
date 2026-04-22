@@ -35,7 +35,7 @@ const AuthProvider = ({children}) => {
                  if (currentUser) {
                     const loggedUser = { email: currentUser.email }
 
-                    fetch('http://localhost:3000/getToken', {
+                    fetch('https://smart-deals-server-enp1.onrender.com/getToken', {
                         method: 'POST',
                         headers: {
                             'content-type': "application/json"

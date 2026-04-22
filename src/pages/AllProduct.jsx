@@ -9,7 +9,7 @@ const AllProduct = () => {
    const [products, setProducts] = useState([]);
    const { user } = use(AuthContext);
    useEffect(() => {
-    axios.get('http://localhost:3000/all-products')
+    axios.get('https://smart-deals-server-enp1.onrender.com/all-products')
       .then(res => setProducts(res.data));
         
    }, []);

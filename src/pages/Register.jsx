@@ -18,7 +18,7 @@ const Register = () => {
         }
 
         //create user in the database
-        fetch('http://localhost:3000/users',{
+        fetch('https://smart-deals-server-enp1.onrender.com/users',{
             method: 'POST',
             headers: {
               "content-type": "application/json"

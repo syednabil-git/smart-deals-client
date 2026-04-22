@@ -13,12 +13,12 @@ const ProductDetails = () => {
     const [product, setProduct] = useState({});
     
     useEffect(() => {
-        axios.get(`http://localhost:3000/products/bids/${productId}`)
+        axios.get(`https://smart-deals-server-enp1.onrender.com/products/bids/${productId}`)
         .then(data => {
           console.log('after axios get', data)
           setBids(data.data);
         });
-        axios.get(`http://localhost:3000/products/${productId}`)
+        axios.get(`https://smart-deals-server-enp1.onrender.com/products/${productId}`)
         .then(res => {
           setProduct(res.data);
         });
@@ -43,7 +43,7 @@ const ProductDetails = () => {
           status: "pending"
         }
 
-        fetch('http://localhost:3000/bids', {
+        fetch('https://smart-deals-server-enp1.onrender.com/bids', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'

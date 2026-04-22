@@ -7,7 +7,7 @@ import LatestProducts from '../components/LatestProducts';
 import axios from 'axios';
 
 
-const LatestProductsPromise = fetch ('http://localhost:3000/latest-products')
+const LatestProductsPromise = fetch ('https://smart-deals-server-enp1.onrender.com/latest-products')
 .then(res => {
 if (!res.ok) {
         throw new Error("Failed to fetch");
@@ -24,7 +24,7 @@ const [products, setProducts] = useState([]);
 
     const handleSearch = async () => {
       try{
-        const res = await axios.get(`http://localhost:3000/all-products?search=${search}`);
+        const res = await axios.get(`https://smart-deals-server-enp1.onrender.com/all-products?search=${search}`);
         setProducts(res.data);
       }catch (error) {
         console.log(error);

@@ -30,7 +30,7 @@ const MyBids = () => {
 }).then((result) => {
   if (result.isConfirmed)
   {
-    fetch(`http://localhost:3000/bids/${_id}`, {
+    fetch(`https://smart-deals-server-enp1.onrender.com/bids/${_id}`, {
       method: 'DELETE'
     })
     .then(res => res.json())
