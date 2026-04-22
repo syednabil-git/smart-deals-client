@@ -61,8 +61,22 @@ const MyBids = () => {
         My Bids: <span className='text-purple-500'>{bids.length}</span>
       </h1>
 
+      {/* mobile sreen  */}
+           <div className="space-y-3 sm:hidden">
+              {bids.map((bid, i) => (
+            <div key={i} className="px-15 rounded-xl shadow bg-white">
+              <p><b></b><img className='w-20 h-20 rounded-md object-cover flex-shrink-0' src={bid.product_image}></img></p>
+              <p><b>Product-title:</b> {bid.product_title}</p>
+              <p><b>Bid:</b> {bid.product_price_min}</p>
+              <p><b>Status:</b> {bid.status}</p>
+                  <div className="flex justify-center gap-2 mt-2">
+                  <Link onClick={() => handleDeletedBid(bid._id)} to="" className=" p-[2px] rounded-sm bg-gradient-to-r from-[#632EE3] to-[#9F62F2] inline-block"><button className='px-3 py-[3px] rounded-sm bg-white font-semibold hover:bg-gray-100 transition'><span className=' bg-linear-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent'>Remove Bid</span></button></Link>                 
+                  </div>
+            </div>
+                 ))}
+            </div>
       {/* Table */}
-      <div className="overflow-x-auto rounded-xl shadow-md">
+      <div className="overflow-x-auto rounded-xl shadow-md hidden sm:block">
         <table className="w-full border-collapse">
 
           {/* Head */}
@@ -76,6 +90,8 @@ const MyBids = () => {
               <th className="p-3">Actions</th>
             </tr>
           </thead>
+
+     
 
           {/* Body */}
           <tbody>

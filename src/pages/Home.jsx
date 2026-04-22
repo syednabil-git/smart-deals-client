@@ -36,7 +36,7 @@ const [products, setProducts] = useState([]);
 
 
   return (
-    <div>
+    <div className='mx-auto'>
       <div
         className="hero min-h-screen relative flex items-center justify-center text-center overflow-hidden"
         style={{
@@ -89,7 +89,7 @@ const [products, setProducts] = useState([]);
      {/* Card */}
      {
       products.length > 0 ? (
-        <div  className="max-w-[1200px] mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div  className="max-w-[1200px] mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 md:gap-5 ">
             {
               products.map(product => (
                 <div key={product._id} className=" p-4 rounded shadow"> 

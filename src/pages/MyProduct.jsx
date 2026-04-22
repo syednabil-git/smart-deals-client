@@ -35,8 +35,64 @@ const MyProduct = () => {
         My Products: <span className='text-purple-500'>{products.length}</span>
       </h1>
 
-      {/* Table */}
-      <div className="overflow-x-auto rounded-xl shadow-md">
+ {/* ================= MOBILE CARD VIEW ================= */}
+      <div className="sm:hidden space-y-4">
+    {products.map((product, index) => (
+      <div
+        key={product._id}
+        className="p-4 rounded-xl shadow-md bg-white px-5"
+      >
+        <div className="flex items-center gap-3">
+          <img
+            src={product.image}
+            alt=""
+            className="w-14 h-14 rounded-lg border"
+          />
+
+          <div>
+            <p className="font-semibold">
+              #{index + 1} {product.title}
+            </p>
+            <p className="text-sm text-gray-500">{product.category}</p>
+          </div>
+        </div>
+
+        <div className="mt-3 space-y-1 text-sm">
+          <p><b>Price:</b> $ {product.price_min}</p>
+
+          <p>
+            <b>Status:</b>{" "}
+            <span className="px-2 py-1 text-xs rounded-full bg-yellow-300 font-semibold">
+              {product.status}
+            </span>
+          </p>
+        </div>
+
+        <div className="mt-3 flex gap-2">
+          <Link
+            to={`/edit-product/${product._id}`}
+            className="flex-1 text-center py-1 rounded bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold"
+          >
+            Edit
+          </Link>
+
+          <button
+            onClick={() => handleDelete(product._id)}
+            className="flex-1 py-1 rounded bg-gradient-to-r from-red-500 to-pink-600 text-white font-semibold"
+          >
+            Delete
+          </button>
+        </div>
+
+        <button className="mt-2 w-full py-1 rounded bg-gradient-to-r from-green-500 to-purple-500 text-white font-semibold">
+          Make Sold
+        </button>
+      </div>
+    ))}
+  </div>
+
+       {/* ================= DESKTOP TABLE VIEW ================= */}
+      <div className="overflow-x-auto rounded-xl shadow-md hidden sm:block">
         <table className="w-full border-collapse">
 
           {/* Head */}

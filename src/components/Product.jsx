@@ -6,7 +6,7 @@ const Product = ({product}) => {
   const {title, price_min, price_max, image,_id} = product;
   return (
     <div>
-       <div className='card-items 0 p-10 mx-auto max-w-[1380px]'>
+       <div className='card-items 0 p-2 ml-1 md:ml-3 mx-auto max-w-[1380px] items-center'>
          <div className=' grid grid-cols-3 gap-2'>
           <div className="card bg-base-100 w-96 shadow-sm">
          <figure className="px-10 pt-10">

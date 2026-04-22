@@ -71,140 +71,225 @@ const ProductDetails = () => {
       } 
     
   return (
-    <div className='bg-gray-100 max-w-full mx-auto p-10 px-20 gap-5 items-start'>
-        {/* product info */}
-        <div>
-           <div className='flex justify-between items-start gap-5'>
-              <div className='left p-2  w-[500px]'>
-                <img className='w-full h-80 items-center mx-auto rounded-xl' src={product.image}></img>
-                <div className='bg-white mt-5 p-5 rounded-xl'>
-                  <h3 className='font-bold text-xl'>Product Description</h3>
-                  <div className='flex justify-between items-center'>
-                  <h3 className='font-semibold text-purple-600 text-lg'>Condition: <span className='text-black'>{product.condition}</span></h3>
-                  <h3 className='font-semibold text-purple-600 text-lg'>Usage Time: <span className='text-black'>{product.usage}</span></h3>
-                  </div>
-                   <div className="divider"></div>
-                  <p className='details'>{product.description}</p>
-                </div>
-                </div>
-              <div className='right  w-[800px]'>
-                <NavLink to='/' className='font-semibold flex items-center'><span className='mr-2'><FaBackward></FaBackward></span> Back to Products</NavLink>
-                <h1 className='title text-3xl font-bold'>{product.title}</h1>
-                <div className='bg-white rounded-lg p-2 mt-4'>
-                  <p className='Price font-semibold text-lg text-green-400'>${product.price_min} - ${product.price_max}</p>
-                  <p>Price starts from</p>
-                </div>
-                <div className='my-4 bg-white rounded-lg p-2'>
-                 <h1 className='font-semibold text-lg mb-2'>Products Details</h1>
-                 <p className='font-semibold'>Product ID: <span className='text-gray-500'>{product._id}</span></p>
-                 <p className='font-semibold'>posted: <span className='text-gray-500'>{product.created_at}</span></p>
-                </div>
-                <div className='bg-white rounded-lg p-2'>
-                  <h1 className='font-semibold text-lg'>Seller Information</h1>
-                  <div className='mt-2'>
-                    <div className='flex items-center'>
-                      <img className='rounded-full w-15 h-15' src={product.seller_image}></img>
-                    <div className='ml-5'>
-                      <p className='font-semibold text-m'>{product.seller_name}</p>
-                      <p>{product.email}</p>
-                    </div>
-                    </div>
-                    <p className='font-semibold'>location: <span className='text-gray-600'>{product.location}</span> </p>
-                    <p className='font-semibold'>Contact: <span className='text-gray-600'>{product.seller_contact}</span> </p>
-                    <p className='font-semibold my-2'>Status:<span className='bg-amber-300 rounded-4xl p-1 px-2 ml-2'>{product.status}</span> </p>
-                  </div>
-                </div>
-               <button onClick={handleBidModalOpen} className='btn w-full mt-3 bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white'>I Want Buy This Product</button>
-              </div>
-           </div>
-           <div>
-              
-              {/* Open the modal using document.getElementById('ID').showModal() method */}
-                <dialog ref={bidModalRef} className="modal modal-bottom sm:modal-middle">
-             <div className="modal-box">
-                <h3 className="font-bold text-lg">Give the best offer!</h3>
-                  <p className="py-4">offer something seller can not resist</p>
+    <div className="bg-gray-100 max-w-7xl mx-auto p-4 md:p-10">
 
-                  <form onSubmit={handleBidSubmit}>
-                      <fieldset className="fieldset">
-                        <label className="label">Name</label>
-                        <input type="text" className="input" name='name' readOnly defaultValue={user?.displayName} />
-                        <label className="label">Email</label>
-                        <input type="email" className="input"name='email' readOnly defaultValue={user?.email} />
-                        <label className="label">Bid</label>
-                        <input type="text" className="input" name='bid' placeholder='your bid' />
-                        
-                        <button className="btn btn-neutral mt-4 bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold">Please your bid</button>
-                      </fieldset>
-                  </form>
-              <div className="modal-action">
-                <form method="dialog">
-                {/* if there is a button in form, it will close the modal */}
-                  <button className="btn">Cancle</button>
-                  </form>
-                </div>
-               </div>
-               </dialog>
-              </div>
-             </div>
-                {/* Bids for this products */}
-            <div className='mt-10 bg-white rounded-lg'>
-              <h3 className='text-3xl p-2'>Bids for this products: <span className='text-primary text-purple-600'>{bids.length}</span></h3>
-            </div>
+  {/* ================= TOP SECTION ================= */}
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-            <div className="overflow-x-auto bg-white rounded-lg">
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-        <th>
-          SL NO.
-        </th>
-        <th>Buyer Name</th>
-        <th>Buyer Email</th>
-        <th>Bid Price</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {/* row 1 */}
-      {
+    {/* ================= LEFT SIDE ================= */}
+    <div className="space-y-4">
 
-        bids.map((bid, index) =><tr key={bid._id}>
-        <th>
-          {index +1}
-        </th>
-        <td>
-          <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
-                <img
-                  src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                  alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">{bid.buyer_name}</div>
-              <div className="text-sm opacity-50">{product.location}</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          {bid.buyer_email}
-        </td>
-        <td>{bid.bid_price}</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-        )
-    }
-      
-    </tbody>
-   
-  </table>
-</div>
+      <img
+        className="w-full h-80 object-cover rounded-xl shadow"
+        src={product.image}
+        alt="product"
+      />
+
+      <div className="bg-white p-5 rounded-xl shadow">
+        <h3 className="font-bold text-xl">Product Description</h3>
+
+        <div className="flex justify-between mt-3 text-sm">
+          <p><b>Condition:</b> {product.condition}</p>
+          <p><b>Usage:</b> {product.usage}</p>
+        </div>
+
+        <div className="my-3 border-t"></div>
+
+        <p className="text-gray-600">{product.description}</p>
+      </div>
+
     </div>
+
+    {/* ================= RIGHT SIDE ================= */}
+    <div className="space-y-4">
+
+      <NavLink
+        to="/"
+        className="text-sm font-semibold text-purple-600 flex items-center gap-1"
+      >
+        ← Back to Products
+      </NavLink>
+
+      <h1 className="text-2xl md:text-3xl font-bold">
+        {product.title}
+      </h1>
+
+      {/* Price */}
+      <div className="bg-white p-4 rounded-xl shadow">
+        <p className="text-green-500 font-bold text-lg">
+          ${product.price_min} - ${product.price_max}
+        </p>
+        <p className="text-sm text-gray-500">Price starts from</p>
+      </div>
+
+      {/* Product Info */}
+      <div className="bg-white p-4 rounded-xl shadow text-sm space-y-1">
+        <p><b>Product ID:</b> {product._id}</p>
+        <p><b>Posted:</b> {product.created_at}</p>
+      </div>
+
+      {/* Seller Info */}
+      <div className="bg-white p-4 rounded-xl shadow">
+
+        <h2 className="font-bold mb-3">Seller Information</h2>
+
+        <div className="flex items-center gap-3">
+          <img
+            className="w-12 h-12 rounded-full object-cover"
+            src={product.seller_image}
+            alt="seller"
+          />
+
+          <div>
+            <p className="font-semibold">{product.seller_name}</p>
+            <p className="text-sm text-gray-500">{product.email}</p>
+          </div>
+        </div>
+
+        <div className="mt-3 space-y-1 text-sm">
+          <p><b>Location:</b> {product.location}</p>
+          <p><b>Contact:</b> {product.seller_contact}</p>
+
+          <p className="mt-2">
+            <b>Status:</b>{" "}
+            <span className="bg-yellow-300 px-2 py-1 rounded-full text-xs font-semibold">
+              {product.status}
+            </span>
+          </p>
+        </div>
+
+      </div>
+
+      {/* Buy Button */}
+      <button
+        onClick={handleBidModalOpen}
+        className="w-full bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white py-2 rounded-lg font-semibold"
+      >
+        I Want To Buy This Product
+      </button>
+
+    </div>
+  </div>
+
+  {/* ================= BID MODAL ================= */}
+  <dialog ref={bidModalRef} className="modal modal-bottom sm:modal-middle">
+
+    <div className="modal-box">
+
+      <h3 className="font-bold text-lg">Give the best offer!</h3>
+      <p className="py-2 text-sm text-gray-500">
+        Offer something seller can not resist
+      </p>
+
+      <form onSubmit={handleBidSubmit} className="space-y-3">
+
+        <div>
+          <label className="label">Name</label>
+          <input
+            type="text"
+            name="name"
+            readOnly
+            defaultValue={user?.displayName}
+            className="input input-bordered w-full"
+          />
+        </div>
+
+        <div>
+          <label className="label">Email</label>
+          <input
+            type="email"
+            name="email"
+            readOnly
+            defaultValue={user?.email}
+            className="input input-bordered w-full"
+          />
+        </div>
+
+        <div>
+          <label className="label">Bid Price</label>
+          <input
+            type="text"
+            name="bid"
+            placeholder="Your bid"
+            className="input input-bordered w-full"
+          />
+        </div>
+
+        <button className="btn w-full bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white">
+          Submit Bid
+        </button>
+
+      </form>
+
+      <div className="modal-action">
+        <form method="dialog">
+          <button className="btn">Cancel</button>
+        </form>
+      </div>
+
+    </div>
+  </dialog>
+
+  {/* ================= BIDS SECTION ================= */}
+  <div className="mt-10 space-y-4">
+
+    {/* Header */}
+    <div className="bg-white p-4 rounded-xl shadow">
+      <h3 className="text-xl font-bold">
+        Bids ({bids.length})
+      </h3>
+    </div>
+
+    {/* Table */}
+    <div className="bg-white rounded-xl shadow overflow-x-auto">
+
+      <table className="w-full text-sm">
+
+        <thead className="bg-gray-100">
+          <tr>
+            <th className="p-3">SL</th>
+            <th>Buyer</th>
+            <th>Bid Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          {bids.map((bid, index) => (
+            <tr
+              key={bid._id}
+              className="border-t hover:bg-gray-50 text-center"
+            >
+
+              <td className="p-3">{index + 1}</td>
+
+              <td className="font-semibold">
+                {bid.buyer_name}
+              </td>
+
+              <td className="font-bold text-green-500">
+                ${bid.bid_price}
+              </td>
+
+              <td>
+                <button className="text-purple-600 font-semibold">
+                  Details
+                </button>
+              </td>
+
+            </tr>
+          ))}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
   )
 }
 
