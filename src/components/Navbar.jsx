@@ -58,7 +58,7 @@ const Navbar = () => {
             :
                <div className='items-center flex justify-center'>
                  <Link to="/login" className=" p-[1.5px] rounded-sm bg-gradient-to-r from-[#632EE3] to-[#9F62F2] inline-block"><button className='px-5 py-[6px] rounded-sm bg-white font-semibold hover:bg-gray-100 transition'><span className=' bg-linear-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent'>Login</span></button></Link>
-                    <Link  to="/register" className="btn ml-3 mr-10 bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold">Register</Link>
+                   <div className='hidden sm:block'> <Link  to="/register" className="btn text-center ml-3 mr-10 bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold ">Register</Link></div>
                </div>
 
 

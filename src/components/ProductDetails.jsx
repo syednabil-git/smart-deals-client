@@ -80,7 +80,7 @@ const ProductDetails = () => {
     <div className="space-y-4">
 
       <img
-        className="w-full h-80 object-cover rounded-xl shadow"
+        className="w-65 sm:w-100 h-60 sm:h-80 object-cover rounded-xl shadow mx-auto"
         src={product.image}
         alt="product"
       />

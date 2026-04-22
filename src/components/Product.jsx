@@ -20,7 +20,7 @@ const Product = ({product}) => {
        <h2 className="card-title">{title} </h2>
        <p className='text-purple-600 font-semibold'>Price: ${price_min} - ${price_max}</p>
        <div className="w-full">
-           <Link to={`/productDetails/${_id}`} className=" p-[1.5px] rounded-sm bg-gradient-to-r from-[#632EE3] to-[#9F62F2] inline-block w-full"><button className='px-5 py-[6px] rounded-sm bg-white font-semibold hover:bg-gray-100 transition w-full'><span className=' bg-linear-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent'>View Details</span></button></Link> 
+           <Link to={`/productDetails/${_id}`} onMouseEnter={() => import("../components/ProductDetails")} className=" p-[1.5px] rounded-sm bg-gradient-to-r from-[#632EE3] to-[#9F62F2] inline-block w-full"><button className='px-5 py-[6px] rounded-sm bg-white font-semibold hover:bg-gray-100 transition w-full'><span className=' bg-linear-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent'>View Details</span></button></Link> 
        </div>
       </div>
     </div>

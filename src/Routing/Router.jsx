@@ -1,68 +1,83 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import Home from "../pages/Home";
-import AllProduct from "../pages/AllProduct";
-import CreateProduct from "../pages/CreateProduct";
-import MyProduct from "../pages/MyProduct";
-import MyBids from "../pages/MyBids";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import ProductDetails from "../components/ProductDetails";
+import { lazy, Suspense } from "react";
 import PrivateRouter from "./PrivateRouter";
-import EditProduct from "../components/EditProduct";
+
+// 🔥 Lazy imports
+const App = lazy(() => import("../App"));
+const Home = lazy(() => import("../pages/Home"));
+const AllProduct = lazy(() => import("../pages/AllProduct"));
+const CreateProduct = lazy(() => import("../pages/CreateProduct"));
+const MyProduct = lazy(() => import("../pages/MyProduct"));
+const MyBids = lazy(() => import("../pages/MyBids"));
+const Login = lazy(() => import("../pages/Login"));
+const Register = lazy(() => import("../pages/Register"));
+const ProductDetails = lazy(() => import("../components/ProductDetails"));
+const EditProduct = lazy(() => import("../components/EditProduct"));
+
+// 🔥 Wrapper for Suspense
+const withSuspense = (Component) => (
+  <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+    <Component />
+  </Suspense>
+);
 
 export const router = createBrowserRouter([
-    {
-        path:'/',
-        element:<App></App>,
-        children:[
-            {
-                path:'/',
-                element:<Home></Home>,
-            },
-            {
-                path:'/all-product',
-                element: <AllProduct></AllProduct>,
-            },
-            {
-                path:'/create-product',
-                element:<CreateProduct></CreateProduct>,
-            },
-            {
-                path:'/my-product',
-                element: (<PrivateRouter>
-                    <MyProduct></MyProduct>
-                </PrivateRouter>),
-            },
-            {
-                path:'/edit-product/:id',
-                element: (
-                    <EditProduct></EditProduct>
-                )
-            },
-            {
-                path:'/my-bids',
-                element:(<PrivateRouter>
-                    <MyBids></MyBids>
-                </PrivateRouter>),
-            },
-            {
-                path: 'productDetails/:id',
-                loader: ({params}) => fetch(`https://smart-deals-server-enp1.onrender.com/products/${params.id}`),
-                element: <PrivateRouter>
-                    <ProductDetails></ProductDetails>
-                </PrivateRouter>
-            },
-        
-        ],
-    },
-    {
-        path:'/login',
-        element: <Login></Login>,
-
-    },
-    {
-        path:'/register',
-        element:<Register></Register>,
-    },
+  {
+    path: "/",
+    element: withSuspense(App),
+    children: [
+      {
+        path: "/",
+        element: withSuspense(Home),
+      },
+      {
+        path: "/all-product",
+        element: withSuspense(AllProduct),
+      },
+      {
+        path: "/create-product",
+        element: withSuspense(CreateProduct),
+      },
+      {
+        path: "/my-product",
+        element: (
+          <PrivateRouter>
+            {withSuspense(MyProduct)}
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/edit-product/:id",
+        element: withSuspense(EditProduct),
+      },
+      {
+        path: "/my-bids",
+        element: (
+          <PrivateRouter>
+            {withSuspense(MyBids)}
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "productDetails/:id",
+        loader: ({ params }) =>
+          fetch(
+            `https://smart-deals-server-enp1.onrender.com/products/${params.id}`
+          ),
+        element: (
+          <PrivateRouter>
+            {withSuspense(ProductDetails)}
+          </PrivateRouter>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: withSuspense(Login),
+  },
+  {
+    path: "/register",
+    element: withSuspense(Register),
+  },
 ]);
